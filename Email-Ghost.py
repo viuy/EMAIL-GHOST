@@ -1,7 +1,7 @@
 import smtplib
 import os
 import sys
-suma = 0
+suma = 1
 numero = 1
 
 class bcolors:
