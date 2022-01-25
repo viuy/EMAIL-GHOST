@@ -35,18 +35,26 @@ except ValueError:
     print(" ")
     sys.exit()
 
-	@@ -48,20 +49,24 @@ def email():
+def email():
+    try:
+        message = (mensaje)
+
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login((tucorreo), (contraseña))
+
+        server.sendmail((tucorreo), (correo), message)
 
         server.quit()
 
         print(bcolors.GREEN + 'Correo enviado ' + str(suma) + bcolors.RESET + "")
-
+    
     except smtplib.SMTPAuthenticationError:
         print(" ")
         print(bcolors.yellow + "tu usuario o contraseña es incorrecto, prueba a cambiarlos" + bcolors.RESET + "")
         print(" ")         
         sys.exit()
-
+    
     except smtplib.SMTPRecipientsRefused:
         print(" ")
         print(bcolors.yellow + correo + " no es un correo valido, prueba a cambiarlo" + bcolors.RESET + "")
