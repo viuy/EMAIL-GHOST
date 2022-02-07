@@ -1,8 +1,18 @@
 import smtplib
 import os
 import sys
+import datetime
 suma = 1
 numero = 1
+
+def banner():
+    print(bcolors.GREEN + """
+ _____ __  __    _    ___ _           ____ _   _  ___  ____ _____
+| ____|  \/  |  / \  |_ _| |         / ___| | | |/ _ \/ ___|_   _|
+|  _| | |\/| | / _ \  | || |   _____| |  _| |_| | | | \___ \ | |  
+| |___| |  | |/ ___ \ | || |__|_____| |_| |  _  | |_| |___) || |  
+|_____|_|  |_/_/   \_\___|_____|     \____|_| |_|\___/|____/ |_|  
+                                                                   """ + bcolors.RESET)
 
 class bcolors:
     GREEN = "\033[92m"
@@ -10,8 +20,8 @@ class bcolors:
     yellow = "\033[93m"
     cyan = "\033[36m"
 
-print(" ")
-print(bcolors.yellow + "EMAIL-GHOST")
+banner()
+
 print(" ")
 print(bcolors.yellow + "by VIUY" )
 print(bcolors.cyan + "TikTok: viuy.tt" )
@@ -34,6 +44,9 @@ except ValueError:
     print(bcolors.yellow + "ERROR" + bcolors.RESET + "")
     print(" ")
     sys.exit()
+
+hora1 = datetime.datetime.now
+os.system("clear")
 
 def email():
     try:
@@ -61,10 +74,17 @@ def email():
         print(" ")
         sys.exit()
 
-if(veces == suma):
-    print(" ")
-    print(bcolors.yellow + "spam terminado correctamente")
+banner()
+print("")
+hora2 = datetime.datetime.now
 
 for _ in range(veces):
     email()
     suma = suma + numero
+
+if(veces == suma):
+    print("")
+    print(bcolors.yellow + "spam terminado correctamente")
+    print("correos enviados:", veces)
+    print("hora de comienzo:", hora1)
+    print("hora de finalizacion:", hora2)
