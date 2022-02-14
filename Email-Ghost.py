@@ -1,9 +1,8 @@
 import smtplib
 import os
 import sys
-import datetime
+import time
 suma = 1
-numero = 1
 
 def banner():
     print(bcolors.GREEN + """
@@ -35,7 +34,7 @@ print(" ")
 tucorreo = input("¿con que correo quieres spamear?" + bcolors.RESET + "")
 contraseña = input(bcolors.GREEN + "¿cual es la contraseña del correo?" + bcolors.RESET + "")
 correo = input(bcolors.GREEN + "¿a que correo quieres espamear?" + bcolors.RESET + "")
-mensaje = input(bcolors.GREEN + "¿que mensaje quieres spamear?" + bcolors.RESET + "")
+message = input(bcolors.GREEN + "¿que mensaje quieres spamear?" + bcolors.RESET + "")
 
 try:
     veces = int(input(bcolors.GREEN + "¿Cuantas veces?" + bcolors.RESET + ""))
@@ -45,13 +44,11 @@ except ValueError:
     print(" ")
     sys.exit()
 
-hora1 = datetime.datetime.now
+e = time.time()
 os.system("clear")
 
 def email():
     try:
-        message = (mensaje)
-
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         server.login((tucorreo), (contraseña))
@@ -61,7 +58,7 @@ def email():
         server.quit()
 
         print(bcolors.GREEN + 'Correo enviado ' + str(suma) + bcolors.RESET + "")
-    
+
     except smtplib.SMTPAuthenticationError:
         print(" ")
         print(bcolors.yellow + "tu usuario o contraseña es incorrecto, prueba a cambiarlos" + bcolors.RESET + "")
@@ -76,15 +73,22 @@ def email():
 
 banner()
 print("")
-hora2 = datetime.datetime.now
 
 for _ in range(veces):
     email()
-    suma = suma + numero
+    suma = suma + 1
 
-if(veces == suma):
-    print("")
-    print(bcolors.yellow + "spam terminado correctamente")
-    print("correos enviados:", veces)
-    print("hora de comienzo:", hora1)
-    print("hora de finalizacion:", hora2)
+    if(veces == suma - 1):
+        t = time.time()
+        ti = t - e
+        se = round(ti)
+        dias = se // (24 * 60 * 60)
+        se = se % (24 * 60 * 60)
+        horas = se // (60 * 60)
+        se = se % (60 * 60)
+        minutos = se // 60
+        se = se % 60
+        print("")
+        print(bcolors.yellow + "spam terminado correctamente")
+        print("correos enviados:", veces)
+        print('tiempo: dias: {} - horas: {} - minutos: {} - segundos: {}'.format(dias, horas, minutos, se) + bcolors.RESET + "")
